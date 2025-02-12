@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 # The address of your Orchestrator in K8s.
-ORCHESTRATOR_URL = "http://localhost:8023/create-job"
+ORCHESTRATOR_URL = "http://localhost:30022/create-job"
 
 @app.route("/trigger-job", methods=["POST"])
 def trigger_job():
