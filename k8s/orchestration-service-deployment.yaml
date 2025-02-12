@@ -17,6 +17,7 @@ spec:
       containers:
       - name: orchestration-service
         image: k8s-poc-orchestration-service:latest
+        imagePullPolicy: Never   # To use the local image if available
         ports:
           - containerPort: 8022
         # If you need env vars for anything, specify them here:

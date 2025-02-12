@@ -25,22 +25,18 @@ services:
     ports:
       - "8022:8022"
 
-  # Worker A (Ephemeral in real K8s; here, just keep it running so the image is built)
+  # Worker A (Ephemeral in real K8s)
   processor-1:
     container_name: k8s-poc-processor-1
     build:
       context: ./processor_1
       dockerfile: Dockerfile
     image: k8s-poc-processor-1:latest
-    command: tail -f /dev/null
-    # "tail -f /dev/null" is just to keep the container alive
-    # so Compose doesn't stop it immediately.
 
-  # Worker B (same idea as Worker A)
+  # Worker B (Ephemeral in real K8s)
   processor-2:
     container_name: k8s-poc-processor-2
     build:
       context: ./processor_2
       dockerfile: Dockerfile
     image: k8s-poc-processor-2:latest
-    command: tail -f /dev/null

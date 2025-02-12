@@ -4,9 +4,9 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 # The address of your Orchestrator in K8s.
-ORCHESTRATOR_URL = "http://localhost:30022/create-job"
+ORCHESTRATOR_URL = "http://localhost:30022"
 
-@app.route("/trigger-job", methods=["POST"])
+@app.route("/bot/run", methods=["POST"])
 def trigger_job():
     data = request.get_json(force=True)
     processor = data.get("processor")
@@ -18,7 +18,7 @@ def trigger_job():
     payload = {"processor": processor}
 
     try:
-        r = requests.post(ORCHESTRATOR_URL, json=payload, timeout=5)
+        r = requests.post(url=f"{ORCHESTRATOR_URL}/create-job", json=payload, timeout=5)
         r.raise_for_status()
     except requests.exceptions.RequestException as e:
         return jsonify(

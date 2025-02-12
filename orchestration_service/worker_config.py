@@ -1,5 +1,5 @@
 JOB_SPECS = {
-    "processor_1": {
+    "processor-1": {
         "apiVersion": "batch/v1",
         "kind": "Job",
         "metadata": {
@@ -28,7 +28,7 @@ JOB_SPECS = {
             }
         }
     },
-    "processor_2": {
+    "processor-2": {
         "apiVersion": "batch/v1",
         "kind": "Job",
         "metadata": {

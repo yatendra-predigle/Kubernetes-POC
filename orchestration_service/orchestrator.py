@@ -56,4 +56,4 @@ def create_job():
     }), 201
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8022)
+    app.run(host="0.0.0.0", port=8022, debug=True)
