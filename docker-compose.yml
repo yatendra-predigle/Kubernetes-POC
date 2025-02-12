@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  # Client's API (outside K8s in cloud run after deployment)
+  api-service:
+    container_name: k8s-poc-api-service
+    build:
+      context: ./api_service
+      dockerfile: Dockerfile
+    image: k8s-poc-api-service:latest
+    ports:
+      - "8021:8021"
+    environment:
+      ORCHESTRATOR_URL: "http://localhost:8022"
+    depends_on:
+      - orchestration-service
+
+  # Orchestrator (would normally run in K8s; here it's just a container)
+  orchestration-service:
+    container_name: k8s-poc-orchestration-service
+    build:
+      context: ./orchestration_service
+      dockerfile: Dockerfile
+    image: k8s-poc-orchestration-service:latest
+    ports:
+      - "8022:8022"
+
+  # Worker A (Ephemeral in real K8s; here, just keep it running so the image is built)
+  processor-1:
+    container_name: k8s-poc-processor-1
+    build:
+      context: ./processor_1
+      dockerfile: Dockerfile
+    image: k8s-poc-processor-1:latest
+    command: tail -f /dev/null
+    # "tail -f /dev/null" is just to keep the container alive
+    # so Compose doesn't stop it immediately.
+
+  # Worker B (same idea as Worker A)
+  processor-2:
+    container_name: k8s-poc-processor-2
+    build:
+      context: ./processor_2
+      dockerfile: Dockerfile
+    image: k8s-poc-processor-2:latest
+    command: tail -f /dev/null
