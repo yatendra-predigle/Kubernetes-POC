@@ -1,0 +1,8 @@
+kubectl apply -f k8s/
+
+kubectl delete svc,deploy,job,pod --all --all-namespaces
+
+docker run --name k8s-poc-api-service \
+  -p 8021:8021 \
+  -e ORCHESTRATOR_URL="http://localhost:30022" \
+  k8s-poc-api-service:latest

@@ -11,7 +11,7 @@ services:
     ports:
       - "8021:8021"
     environment:
-      ORCHESTRATOR_URL: "http://localhost:8022"
+      ORCHESTRATOR_URL: "http://localhost:30022"
     depends_on:
       - orchestration-service
 
